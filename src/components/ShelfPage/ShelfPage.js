@@ -42,6 +42,7 @@ function ShelfPage() {
     axios.delete(`/api/shelf/${imageId}/${userId}`)
       .then(response => {
         console.log('delete worked!', response)
+        dispatch({ type: 'FETCH_SHELF_ITEMS' })
       })
       .catch(error => {
         console.error("error!", error)

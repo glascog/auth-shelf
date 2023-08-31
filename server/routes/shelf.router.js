@@ -41,9 +41,10 @@ router.post('/', rejectUnauthenticated, (req, res) => {
  */
 router.delete('/:id/:user_id', rejectUnauthenticated, (req, res) => {
   const queryValues = [req.params.id]
-  let queryText = 'DELETE * from "item" WHERE "id" = $1';
-  
-  if( req.user.id === req.params.user_id ) {
+  let queryText = 'DELETE from "item" WHERE "id" = $1';
+  console.log('req.user.id:', req.user.id)
+  console.log('req.params.user_id:', Number(req.params.user_id))
+  if( req.user.id === Number(req.params.user_id) ) {
     pool.query(queryText, queryValues).then((result) => {
     res.sendStatus(200);
   }).catch((error) => {
